@@ -4638,6 +4638,8 @@
 		api.newelement = function(section, type, name, data, callback)      
 			section:Element(type, name, data, callback)      
 		end      
+
+		
         local weird = different:Sector("weird", "Left")
 
         weird:Element("Button", "Hostage Spoofer", {}, function()
