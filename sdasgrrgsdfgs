@@ -29,17 +29,25 @@
 	local POW = math.pow 
 	local UDIM2 = UDim2.new 
 	local CFAngles = CFrame.Angles 
+
+
+	local Players = game:GetService("Players")
 	
-	local library = loadstring(game:HttpGet'https://raw.githubusercontent.com/Cr1st1cal/serenity/main/message%20(4).txt')()
+	
+local LocalPlayer = Players.LocalPlayer
+	local library = loadstring(game:HttpGet'https://raw.githubusercontent.com/coderinblack228/watermark/main/watermark.lua')()
 			local Watermark = "test"
 			-- set this ^ to whatever build this is
-			if Watermark == "test" then
-				library:CreateWatermark("suka.blyat | suka.blyat always on top 1")
-				library.theme.accentcolor = Color3.fromRGB(0, 0, 0)
-				library.theme.accentcolor2 = Color3.fromRGB(0, 0, 0)
-				library.theme.topheight = 10
-				library.theme.TextColor = Color3.fromRGB(0, 0, 0)
-			end
+			
+				
+				if Watermark == "test" then
+					library:CreateWatermark("suka.blyat | version: 0.9 beta | " .. LocalPlayer.Name .. " |" .. " {fps}" .. " | " .. "{game}")
+					library.theme.accentcolor = Color3.fromRGB(0, 0, 0)
+					library.theme.accentcolor2 = Color3.fromRGB(0, 0, 0)
+					library.theme.topheight = 10
+					library.theme.TextColor = Color3.fromRGB(0, 0, 0)
+				end
+			
 			if Watermark == "Dev" then
 				library:CreateWatermark("suka.blyat | Build: Dev")
 				library.theme.accentcolor = Color3.fromRGB(0, 0, 0)
@@ -95,7 +103,7 @@
 		return copy
 	end
 	function library:ConfigFix(cfg)
-		local copy = game:GetService("HttpService"):JSONDecode(readfile(cfglocation..cfg..".cfg"))
+		local copy = game:GetService("HttpService"):JSONDecode(readfile(cfglocation..cfg..".amogus"))
 		for i,Tabs in pairs(copy) do
 			for i,Sectors in pairs(Tabs) do
 				for i,Elements in pairs(Sectors) do
@@ -119,7 +127,7 @@
 				end
 			end
 		end
-		writefile(cfglocation..cfg..".cfg", game:GetService("HttpService"):JSONEncode(copy))
+		writefile(cfglocation..cfg..".amogus", game:GetService("HttpService"):JSONEncode(copy))
 	end
 	
 	function library:New(name)
@@ -4749,6 +4757,7 @@
 		aimbot:Element("Slider", "prediction hitchance", {min = 0, max = 400, default = 50})
 		aimbot:Element("Toggle", "sex package")      
 		aimbot:Element("Toggle", "hit logs")  
+		aimbot:Element("Slider", "penetration", {min = 1, max = 100, default = 1})
 		aimbot:Element("Toggle", "teammates")      
 		aimbot:Element("Toggle", "auto baim")      
 		aimbot:Element("Toggle", "knifebot")      
@@ -6081,50 +6090,101 @@
 		chat:Element("Toggle", "kill say")      
 		chat:Element("TextBox", "message", {placeholder = "message"})      
 		chat:Element("Toggle", "no filter")      
-		local MX_ONHIT = Instance.new("ScreenGui")
-		local OnHitFrame = Instance.new("Frame")
-		local UIListLayout = Instance.new("UIListLayout")
-		local SampleLabel = Instance.new("TextLabel")
-
-
-		MX_ONHIT.Name = "MX_ONHIT"
-		MX_ONHIT.Parent = game.CoreGui
-		MX_ONHIT.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-		OnHitFrame.Parent = MX_ONHIT
-		OnHitFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		OnHitFrame.BackgroundTransparency = 1.000
-		OnHitFrame.Position = UDim2.new(1, -300, 0, 0)
-		OnHitFrame.Size = UDim2.new(0, 300, 0, 500)
-
-		UIListLayout.Parent = OnHitFrame
-		UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-
-		SampleLabel.Name = "SampleLabel"
-		SampleLabel.Parent = OnHitFrame
-		SampleLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		SampleLabel.BackgroundTransparency = 1.000
-		SampleLabel.BorderSizePixel = 0
-		SampleLabel.Size = UDim2.new(1, 0, 0, 18)
-		SampleLabel.Font = Enum.Font.SourceSansLight
-		SampleLabel.Text = "Hit SamplePlayer in HeadHB "
-		SampleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-		SampleLabel.TextSize = 16.000
-		SampleLabel.TextStrokeTransparency = 0.000
-		SampleLabel.TextTransparency = 1.000
-		SampleLabel.TextXAlignment = Enum.TextXAlignment.Right
-
-		local function CreateHitElement(text,col)
-			spawn(function()
-				local Label = SampleLabel:Clone()
-				Label.Text = text
-				Label.Parent = MX_ONHIT.Frame
-				Label.TextTransparency = 0
-				Label.TextColor3 = col
-				wait(5)
-				Label:Destroy()
-			end)
-		end
+		--createhitelement
+		local Notification = Instance.new("ScreenGui") do
+			local NotificationFrame = Instance.new("Frame")
+			local UIListLayout = Instance.new("UIListLayout")
+			local SampleFrame = Instance.new("Frame")
+			local Grad = Instance.new("Frame")
+			local SampleLabel = Instance.new("TextLabel")
+			local UIGradient = Instance.new("UIGradient")
+			
+			Notification.Name = "Notification"
+			Notification.Parent = game.CoreGui
+			Notification.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+			
+			NotificationFrame.Name = "NotificationFrame"
+			NotificationFrame.Parent = Notification
+			NotificationFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			NotificationFrame.BackgroundTransparency = 1.000
+			NotificationFrame.Position = UDim2.new(0, 3, 0, -15)
+			NotificationFrame.Size = UDim2.new(0, 300, 0, 500)
+			
+			UIListLayout.Parent = NotificationFrame
+			UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+			UIListLayout.Padding = UDim.new(0, 6)
+			
+			SampleFrame.Name = "SampleFrame"
+			SampleFrame.Parent = NotificationFrame
+			SampleFrame.AutomaticSize = Enum.AutomaticSize.XY
+			SampleFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			SampleFrame.BackgroundTransparency = 1.000
+			SampleFrame.BorderColor3 = Color3.fromRGB(7, 0, 0)
+			SampleFrame.Size = UDim2.new(0, 0, 0, 24)
+			
+			Grad.Name = "Grad"
+			Grad.Parent = SampleFrame
+			Grad.BackgroundColor3 = Color3.fromRGB(222, 232, 255)
+			Grad.BackgroundTransparency = 1.000
+			Grad.AutomaticSize = Enum.AutomaticSize.Y
+			Grad.BorderSizePixel = 0
+			Grad.Size = UDim2.new(0, 3, 0, 24)
+			
+			SampleLabel.Name = "SampleLabel"
+			SampleLabel.Parent = Grad
+			SampleLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			SampleLabel.BackgroundTransparency = 1.000
+			SampleLabel.BorderSizePixel = 0
+			SampleLabel.Position = UDim2.new(1.97835922, 0, 0, 0)
+			SampleLabel.Size = UDim2.new(0, 0, 0, 24)
+			SampleLabel.Font = Enum.Font.Code
+			SampleLabel.Text = "TEST"
+			SampleLabel.TextTruncate = Enum.TextTruncate.AtEnd
+			SampleLabel.AutomaticSize = Enum.AutomaticSize.XY
+			SampleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+			SampleLabel.TextSize = 14.000
+			SampleLabel.TextStrokeTransparency = 0.000
+			SampleLabel.TextTransparency = 1.000
+			SampleLabel.TextXAlignment = Enum.TextXAlignment.Left
+			
+			UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(49, 49, 49)), ColorSequenceKeypoint.new(0.41, Color3.fromRGB(25, 25, 25)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(25, 25, 25))}
+			UIGradient.Rotation = 90
+			UIGradient.Parent = SampleFrame
+			end
+			 
+			local function CreateHitElement(text,col,time, size, size2, size3, size4) 
+				spawn(function()
+					local Frame = Notification.NotificationFrame.SampleFrame:Clone()
+					local Grad = Frame.Grad
+					local Label = Grad.SampleLabel
+					
+					library:Tween(Frame, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(size, size2, size3, size4)}) 
+					library:Tween(Label, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(size, size2, size3, size4)}) 	
+					
+					library:Tween(Frame, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 0.000})       
+					library:Tween(Grad, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 0.000})  
+					library:Tween(Label, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 0.000}) 
+					
+					Frame.Parent = Notification.NotificationFrame
+					Grad.Parent = Frame
+					Label.Parent = Grad
+					Label.TextColor3 = col
+					Label.Text = text
+					wait(time)
+					library:Tween(Frame, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 1.000})       
+					library:Tween(Grad, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 1.000})  
+					library:Tween(Label, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 1.000})
+					library:Tween(Label, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextStrokeTransparency = 1.000})
+					
+					library:Tween(Frame, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 0, size3, size4)}) 
+					library:Tween(Label, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 0, size3, size4)}) 
+					
+					wait(0.8)
+					Frame:Destroy()
+					Grad:Destroy()
+					Label:Destroy()
+				end)
+			end
 		local grenades = misc:Sector("grenades", "Right")      
 		grenades:Element("ToggleKeybind", "spam grenades")      
 		coroutine.wrap(function()      
@@ -6142,7 +6202,7 @@
 		end)()      
 		grenades:Element("Dropdown", "grenade", {options = {"Flashbang", "Smoke Grenade", "Molotov", "HE Grenade", "Decoy Grenade"}})      
 		grenades:Element("Button", "crash server", {}, function() 
-			CreateHitElement("Crashing server..",Color3.new(1,0.5,0.5))
+			CreateHitElement("Crashing server..",Color3.new(1,0.5,0.5), 3, 0, 280, 0, 22)
 			while true do
 				pcall(function()
 					game:GetService("RunService").RenderStepped:Wait()
@@ -6498,36 +6558,29 @@
 					Client.DISABLED = false      
 				end     
 				if values.rage.exploits["kill all"].Toggle and values.rage.exploits["kill all"].Active and LocalPlayer.Character:FindFirstChild("UpperTorso") and LocalPlayer.Character:FindFirstChild("Gun") then
-					for b2, b3 in pairs(game:GetService("Players"):GetChildren()) do
-						if b3.Team ~= b3.Parent.LocalPlayer.Team then
-							if b3.Character and b3.Character:FindFirstChild("UpperTorso") and b3.Parent.LocalPlayer.Character and b3.Parent.LocalPlayer.Character:FindFirstChild("EquippedTool") then
-								if b3.Character:FindFirstChild("Humanoid") and b3.Character.Humanoid.Health > 0 then
-									killallisworking = true
-									local b4 = {
-										[1] = b3.Character.UpperTorso,
-										[2] = b3.Character.UpperTorso.Position,
-										[3] = "T Knife",
-										[4] = 4096,
-													[5] = LocalPlayer.Character.Gun,
-													[8] = 1,
-													[9] = false,
-													[10] = true,
-													[11] = Vector3.new(),
-													[12] = 16868,
-													[13] = Vector3.new()
-									}
+					for _,Player in pairs(Players:GetPlayers()) do 
+						if Player.Character and Player.Team ~= LocalPlayer.Team and Player.Character:FindFirstChild("UpperTorso") then 
+							local oh1 = Player.Character.Head 
+							local oh2 = Player.Character.Head.CFrame.p 
+							local oh3 = Client.gun.Name 
+							local oh4 = 4096 
+							local oh5 = LocalPlayer.Character.Gun 
+							local oh8 = 15 
+							local oh9 = false 
+							local oh10 = false 
+							local oh11 = Vec3(0,0,0) 
+							local oh12 = 16868 
+							local oh13 = Vec3(0, 0, 0) 
 									if values.rage.exploits["hits amount"].Slider > 1 then
 										for i=1, values.rage.exploits["hits amount"].Slider do
-											game.ReplicatedStorage.Events.HitPart:FireServer(unpack(b4))
+											game:GetService("ReplicatedStorage").Events.HitPart:FireServer(oh1, oh2, oh3, oh4, oh5, oh6, oh7, oh8, oh9, oh10, oh11, oh12, oh13) 
 										end
 									else
-										game.ReplicatedStorage.Events.HitPart:FireServer(unpack(b4))
+										game:GetService("ReplicatedStorage").Events.HitPart:FireServer(oh1, oh2, oh3, oh4, oh5, oh6, oh7, oh8, oh9, oh10, oh11, oh12, oh13) 
 									end
-								else killallisworking = false end
-							end
 						end
 					end
-				else killallisworking = false end
+				end 
 				if TBLFIND(values.visuals.effects.removals.Jumbobox, "scope lines") then       
 					NewScope.Enabled = LocalPlayer.Character:FindFirstChild("AIMING") and true or false      
 					Crosshairs.Scope.Visible = false      
@@ -6765,7 +6818,7 @@
 															Client.firebullet()
 														end
 															if values.rage.aimbot["hit logs"].Toggle then
-																CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
+																CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1), 3, 0, 280, 0, 22) 
 															end
 															elseif values.rage.aimbot["autoshoot"].Dropdown == "hitpart" then      
 																Client.firebullet()      
@@ -6816,14 +6869,14 @@
 																	game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))     
 																end   
 																if values.rage.aimbot["hit logs"].Toggle then   
-																CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
+																CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1), 3, 0, 280, 0, 22) 
 																end
 															end      
 															Filter = false      
 															break      
 														end      
 													else      
-														local penetration = Client.gun.Penetration.Value * 0.01	      
+														local penetration = Client.gun.Penetration.Value * (0.01 * values.rage.aimbot['penetration'].Slider	     ) 
 														local limit = 0      
 														local dmgmodifier = 1      
 														for i = 1, #Hits do      
@@ -6882,7 +6935,7 @@
 																	Client.firebullet()    
 																end  
 																if values.rage.aimbot["hit logs"].Toggle then
-																CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
+																CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1), 3, 0, 280, 0, 22) 
 																end
 															elseif values.rage.aimbot["autoshoot"].Dropdown == "hitpart" then      
 																Client.firebullet()      
@@ -6916,7 +6969,7 @@
 																}      
 																game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments)) 
 																if values.rage.aimbot["hit logs"].Toggle then 
-																CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
+																CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1), 3, 0, 280, 0, 22) 
 																end
 																if values.rage.exploits["triple tap"].Toggle and values.rage.exploits["triple tap"].Active then      
 																	Client.firebullet()      
@@ -6985,11 +7038,11 @@
 																Client.firebullet()    
 															end      
 															if values.rage.aimbot["hit logs"].Toggle then
-															CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1))
+															CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1), 3, 0, 280, 0, 22)
 															end 
 														elseif values.rage.aimbot["autoshoot"].Dropdown == "hitpart" then     
 															if values.rage.aimbot["hit logs"].Toggle then
-															CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1))  
+															CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1), 3, 0, 280, 0, 22)  
 															end
 															Client.firebullet()          
 															local Arguments = {      
@@ -8551,4 +8604,4 @@
 				end      
 			end      
 		end      
-		CreateHitElement("Success!",Color3.new(0,1,0))
+		CreateHitElement("suka.blyat Loaded :3",Color3.new(1,1,1), 5, 0, 270,  0, 22)
