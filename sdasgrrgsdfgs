@@ -9,6 +9,37 @@ local TweenService = game:GetService("TweenService")
 function library:Tween(...) TweenService:Create(...):Play() end
 local cfglocation = "suka.blyat_configs/"
 makefolder("suka.blyat_configs")
+-- caching 
+local Vec2 = Vector2.new 
+local Vec3 = Vector3.new 
+local CF = CFrame.new 
+local INST = Instance.new 
+local COL3 = Color3.new 
+local COL3RGB = Color3.fromRGB 
+local COL3HSV = Color3.fromHSV 
+local CLAMP = math.clamp 
+local DEG = math.deg 
+local FLOOR = math.floor 
+local ACOS = math.acos 
+local RANDOM = math.random 
+local ATAN2 = math.atan2 
+local HUGE = math.huge 
+local RAD = math.rad 
+local MIN = math.min 
+local POW = math.pow 
+local UDIM2 = UDim2.new 
+local CFAngles = CFrame.Angles 
+
+local FIND = string.find 
+local LEN = string.len 
+local SUB = string.sub 
+local GSUB = string.gsub 
+local RAY = Ray.new 
+
+local INSERT = table.insert 
+local TBLFIND = table.find 
+local TBLREMOVE = table.remove 
+local TBLSORT = table.sort 
 function rgbtotbl(rgb)
 	return {R = rgb.R, G = rgb.G, B = rgb.B}
 end
