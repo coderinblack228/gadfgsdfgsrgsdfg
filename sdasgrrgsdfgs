@@ -6613,9 +6613,9 @@ RunService.RenderStepped:Connect(function(step)
 		if values.misc.client["infinite crouch"].Toggle then      
 			Client.crouchcooldown = 0      
 		end      
-		if TBLFIND(values.misc.client["gun modifiers"].Jumbobox, "kniferate") and Client.gun:FindFirstChild("Melee") then
+		--[[if TBLFIND(values.misc.client["gun modifiers"].Jumbobox, "kniferate") and Client.gun:FindFirstChild("Melee") then
 			Client.DISABLED = false 
-		end
+		end]]
 		if TBLFIND(values.misc.client["gun modifiers"].Jumbobox, "firerate") then      
 			Client.DISABLED = false      
 		end     
